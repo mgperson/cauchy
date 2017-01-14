@@ -1,0 +1,29 @@
+class Complement:
+    def __init__(self):
+        pass
+
+    def get_reverse(self,inputString):
+        return inputString[::-1]
+
+    def swap_two_chars_in_string(self,inputString,charOne,charTwo):
+        # X used as temp placer
+        inputString = inputString.replace(charOne, 'X')
+        inputString = inputString.replace(charTwo, charOne)
+        inputString = inputString.replace('X',charTwo)
+        return inputString
+
+    def get_complement(self,inputString):
+        inputString = self.swap_two_chars_in_string(inputString,'A','T')
+        inputString = self.swap_two_chars_in_string(inputString, 'C', 'G')
+        return inputString
+
+    def get_reverse_complement(self,inputString):
+        return self.get_reverse(self.get_complement(inputString))
+
+def main():
+    inputString = 'TTAGTGCCGTCACAGGTACTGTGACCAAGTGTAGTACACGACTGTCCGTCGACCACCCCCCTGGTAAGCCCACAAAAGGTGTCGAGAGAACAACCCTTCTTCTCGAACATCACGATAATGGTATAGTTATTCTCGCGCATTTCATACGACACTGATCACGACCGAATTGAAATGCAAGGATGACAGGAGTGGAAAGAAAGGCACAGCGTACCAAGGTTTTATATTCAGGCGCATAATGCCAAGACACATTCCGCATGTGGCAACAGGTTCACAAGCCCGGCTTCACGTGATCGCGTATACTCAAGACGGGACCATACCATTATATTATGTAGGATGGTACGGCAGGGTGCATCGGAGCTCGACTTACTATACTGTCTTAGGACATGTCGAGAATATACAGCTCGGTATGGGCTTAAATAAATTCCTCATATTACTCTTGGTTCACGTACTGATTAGTCTGGTCATCCTGCTGGGTTGGATGAGCCAAATAGTTTTACTCGGAGATGCAGCCACCTGAAATCATACGTTGCTGTTGCTTACCGCTATACGGGGACAGTTGGCCCCGGCATACATGACCGGAGTTGGCACTACTAGAAATAGGACAACATGCGTGCGGACTATAGCGGTGGAAACTCATTTGGCTTACCACTTGACCTACGCCACCGGTGAGTATTTGTCTTCTCATACTTTTTCAAGAGCCGTTTTAAGTTTGCAGGCGAGGGACGGAGCCGACCTGAATCTTTATTGATCCAGAACTAGCCCCCCGAATCGCTACTCGATTAGTTGCTAGCCTGACGAGCTCAACCATACGAAATGATCATGTTCCGTGGTAAGAACATATTCCAAGCCCACTTACAAGTATAGCTTTCCCTTTAGCTT'
+    complement = Complement()
+    print(complement.get_reverse_complement(inputString))
+
+if __name__ == '__main__':
+    main()
