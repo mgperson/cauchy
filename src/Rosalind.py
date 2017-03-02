@@ -60,7 +60,7 @@ def read_input_file(file):
 
 
 def main():
-    DNAStrings = read_input_file('input/lcsm.txt')
+    DNAStrings = read_input_file('input/rosalind_lcsm.txt')
     haystack = Haystack(DNAStrings)
     print(Haystack.solve_for_longest_common_substring(haystack,haystack.DNAStrings))
 
