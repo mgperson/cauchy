@@ -41,7 +41,7 @@ class TestLCSQ(unittest.TestCase):
         self.assertEqual(len(self.u2),560)
 
     def test_is_shortest_supersequence_correct(self):
-        self.assertEqual(self.u3,'ATGCATGAT')
+        self.assertEqual(self.u3,'ATCTGCATA')
 
 
 
