@@ -6,6 +6,7 @@ class LCSQ:
         self.get_longest_common_subsequence()
         pass
 
+
     def get_longest_common_subsequence(self):
         if (self.len_s == 0 or self.len_t == 0):
             return ''

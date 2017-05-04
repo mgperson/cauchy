@@ -1,4 +1,4 @@
-import sys
+    import sys
 sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
 
 from RUtils.src.RosalindUtilities import RosalindUtilities

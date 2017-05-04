@@ -1,5 +1,7 @@
-import os
+'''Solution for SPLC and ASPC'''
+import os, math
 import sys
+import itertools
 sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
 
 from RUtils.src.RosalindUtilities import RosalindUtilities
@@ -14,6 +16,12 @@ class SPLC:
 
     def remove_intron_from_DNA(self,DNA,intron):
         return DNA.replace(intron,'')
+
+    def get_combinations(self,n,m):
+        result = 0
+        for i in range(m,n+1):
+            result += math.factorial(n) // (math.factorial(n-i) * math.factorial(i))
+        return  result % 1000000
 
     def load_amino_acid_codes_for_codons(self):
         values = [('UUU', 'F'), ('UUC', 'F'), ('UUA', 'L'), ('UUG', 'L'),
@@ -93,6 +101,8 @@ def Main():
     splc = SPLC()
     splc.read_input_file('sample.txt')
     print (splc.get_amino_codes_after_removing_introns_from_DNA('test.txt'))
+    n,m = 1679,622
+    print(splc.get_combinations(n,m))
 
 if __name__ == '__main__':
     Main()

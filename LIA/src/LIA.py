@@ -1,7 +1,9 @@
 #MEH had to look up binomial expansions
+'''Solution for INDC as well, though YES I had to further look up binomial expansions'''
 
 import operator as op
 from functools import reduce
+import math, itertools
 
 class LIA:
     def __init__(self):
@@ -35,7 +37,7 @@ class LIA:
         return self.count_of_genotype_dominant_base[genotype]
 
     def get_combinations(self,n, r):
-        print(n,r)
+        #print(n,r)
         r = min(r, n - r)
         if r == 0:
             return 1
@@ -48,10 +50,25 @@ class LIA:
         print(N)
         return sum([self.get_combinations(N,i) *  0.25**i * 0.75 ** (N-i) for i in range(n,N+1)])
 
+    def get_prob_that_k_of_n_chromes_shared_between_siblings(self,n,k):
+        #as binomial expansion formula is p^k*(1-p)^(n-k), when p is 1/2 this factor will always be p^n
+        binomial_expansion_factor = (1/2)**n
+        result = binomial_expansion_factor*float(self.get_combinations(n,k))
+        return result
+
+
+    def get_common_long_of_prob_at_least_k_of_n_chromes_shared(self,n,k):
+        results = [self.get_prob_that_k_of_n_chromes_shared_between_siblings(n,i) for i in range(k,n+1)]
+        result = sum(results)
+        return round(math.log(result,10),3)
+
 def Main():
     lia = LIA()
     k,n = 6,17
-    print(lia.get_expected_value_of_nAaBb_at_generation_k(k,n))
+    #print(lia.get_expected_value_of_nAaBb_at_generation_k(k,n))
+    n = 50
+    print(*[lia.get_common_long_of_prob_at_least_k_of_n_chromes_shared(n*2,i) for i in range(1,n*2+1)])
+
 
 if __name__ == '__main__':
     Main()

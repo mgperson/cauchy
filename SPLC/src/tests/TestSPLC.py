@@ -6,6 +6,10 @@ class TestSPLC(unittest.TestCase):
     def setUp(self):
         self.splc = SPLC()
 
+    def test_get_combinations(self):
+        n,m = 6,3
+        self.assertEqual(self.splc.get_combinations(n,m),42)
+
     def test_remove_intron_from_DNA(self):
         DNA = 'AUCGUGUCAUCAUGACUGUCACUG'
         expected = 'AUCGUGUGACUGUCACUG'
