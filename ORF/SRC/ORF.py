@@ -1,3 +1,9 @@
+#Matt Person
+#Rosalind Problem: ORF
+#source
+'''Given: A DNA string s of length at most 1 kbp in FASTA format.
+Return: Every distinct candidate protein string that can be translated from ORFs of ss. Strings can be returned in any order.'''
+
 import sys
 
 sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
@@ -5,16 +11,14 @@ sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
 from RUtils.src.RosalindUtilities import RosalindUtilities
 
 class ORF:
-    def __init__(self):
+    def __init__(self,s):
         self.ru = RosalindUtilities()
-
-    def get_aa_from_DNACodon(self,DNACodon):
-        return self.ru.get_aa_from_DNA_codon(DNACodon)
+        self.possible_proteins = self.get_possible_proteins_from_DNAString(s)
 
     def get_protein_from_DNAString(self,DNAString):
         protein = ''
         for i in range(0,len(DNAString)-2,3):
-            codon = self.get_aa_from_DNACodon(DNAString[i:i+3])
+            codon = self.ru.get_aa_from_DNA_codon(DNAString[i:i+3])
             if codon == 'Stop':
                 return protein
             protein += codon
@@ -29,9 +33,9 @@ class ORF:
 
 
 def Main():
-    orf = ORF()
     DNAString = 'GTGGTTAATTCAGGCCATGAATCGTTCAAGAGATGTCTTTTATACGGTCGTCTCTTGCCAGACAAACCCCAATAACCGCGCGAGTTTGGTTCGACGGAGCGTTTTACTTCCACGGTGAGGACAGAGCAGGCAACGCGGTTCGCTGTGGGATAGCCGTTTCGTGACTCCTATATGGAAGCCAACCTACTAATTGATAATAGCTTTAGTGAGACCGTTTAGCCCGACACCGTTGAACATTGCTTCCAGCCTGTGGCAACTCGAGTCTGAAATCTGCGTCGCTCCCACCCAGAGAAGGTCAGGACTTATACCTTGTATTCGCAATCGCTGAAACAACTTTCCGGGAGAGCCGTGGGACCAGTTATGCCTATCCCCTAGCGCGAGAGTCGTGAGTGGTCACGTGTAAGCATAAAATTTGATACTGCCAGCTACCGTTCCATGATTGCTTATGTCATGGTGAATGATCGCGAACATTATGTAGCTACATAATGTTCGCGATCATTCACCATGACATACGCGGCGTTATTCTAACGGCACGGGGCGATACGTGAATGCACTTGAGCGAGCAAACTTACACTACTAACGTCCTTCTGCACACTATCTATAGAGCCCTCGAACCTACCTCCAGCTCGTACCAGGGGTGGCTTTAGTAGAGATAGTTCAAGTACCTCGGCGCAGATTCTTAGGGATGATTCAGACCCCTAGGGGTATATAGATTCTACAGGGCGCTCGGTCATTATTCTAATGTCGAGTACGTACTAACCCGTTGCTTTAAATCCTCAGGTTAAGCTCTGTGGACAGTCCGGCGCTGCTACTGGGGGTCCGAAACTTCTCCGCGGGTCCATAACCGGTCTCTAACTCGGAATAGACTCACTGGGAATATGTTCCTAACGCCAACGAGGCGCGAACTCGAGACGTTATCAGTCATTCGTACCGAGAATTAGACCATTGAGTGGGCA'
-    print(*orf.get_possible_proteins_from_DNAString(DNAString),sep='\n')
+    orf = ORF(DNAString)
+    print(*orf.possible_proteins,sep='\n')
 
 
 if __name__ == '__main__':

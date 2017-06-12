@@ -1,3 +1,10 @@
+#Matt Person
+#Rosalind Problem: MPRT
+#source
+'''Given: At most 15 UniProt Protein Database access IDs.
+Return: For each protein possessing the N-glycosylation motif, output its given access ID followed by a list of locations in the protein string
+where the motif can be found.'''
+
 import sys, re
 
 sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
@@ -5,8 +12,9 @@ sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
 from RUtils.src.RosalindUtilities import RosalindUtilities
 
 class MPRT:
-    def __init__(self):
+    def __init__(self,motif,protein_list):
         self.ru = RosalindUtilities()
+        self.accessID_and_locations = self.get_locations_for_motif_in_uniprotid_list(motif,protein_list)
 
     def get_FASTA_for_uniprotid(self,uniprot_id):
         url_base = 'http://www.uniprot.org/uniprot/'
@@ -51,8 +59,8 @@ P08709_FA7_HUMAN
 Q68J42
 B0RU89
 Q8CE94'''.split('\n')
-    mprt = MPRT()
-    for entry in mprt.get_locations_for_motif_in_uniprotid_list(motif,protein_list):
+    mprt = MPRT(motif,protein_list)
+    for entry in mprt.accessID_and_locations:
         print(entry[0])
         print(*entry[1])
 

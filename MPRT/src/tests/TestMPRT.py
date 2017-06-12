@@ -1,10 +1,19 @@
+#Matt Person
+#Rosalind Problem: MPRT
+#unit tests
+
 import unittest
 
 from ..MPRT import MPRT
 
 class TestPRTM(unittest.TestCase):
     def setUp(self):
-        self.mprt = MPRT()
+        motif = 'N[^P][ST][^P]'
+        protein_list = '''A2Z669
+B5ZC00
+P07204_TRBM_HUMAN
+P20840_SAG1_YEAST'''.split('\n')
+        self.mprt = MPRT(motif,protein_list)
 
     def test_get_FASTA_for_uniprotid(self):
         self.assertEqual(self.mprt.get_FASTA_for_uniprotid('A2Z669'),
@@ -26,10 +35,5 @@ MAFISWFALAPSCVLNFWSMASR\n''')
         self.assertEqual(self.mprt.get_locations_for_motif_in_protein(motif, protein), [])
 
     def test_get_locations_for_motif_in_uniprotid_list(self):
-        motif = 'N[^P][ST][^P]'
-        protein_list = '''A2Z669
-B5ZC00
-P07204_TRBM_HUMAN
-P20840_SAG1_YEAST'''.split('\n')
-        expected = [('B5ZC00', '[85, 118, 142, 306, 395]'), ('P07204_TRBM_HUMAN', '[47, 115, 116, 382, 409]'), ('P20840_SAG1_YEAST', '[79, 109, 135, 248, 306, 348, 364, 402, 485, 501, 614]')]
-        self.assertEqual(self.mprt.get_locations_for_motif_in_uniprotid_list(motif,protein_list),expected)
+        expected = [('B5ZC00', [85, 118, 142, 306, 395]), ('P07204_TRBM_HUMAN', [47, 115, 116, 382, 409]), ('P20840_SAG1_YEAST', [79, 109, 135, 248, 306, 348, 364, 402, 485, 501, 614])]
+        self.assertEqual(self.mprt.accessID_and_locations,expected)

@@ -1,3 +1,10 @@
+#Matt Person
+#Rosalind Problem: CONS
+#source
+'''Given: A collection of at most 10 DNA strings of equal length (at most 1 kbp) in FASTA format.
+Return: A consensus string and profile matrix for the collection. (If several possible consensus strings exist, then you may return any one of them.)'''
+
+
 import sys
 
 sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
@@ -5,14 +12,15 @@ sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
 from RUtils.src.RosalindUtilities import RosalindUtilities
 
 class CONS:
-    def __init__(self):
+    def __init__(self,file):
         self.ru = RosalindUtilities()
         self.profile_matrix = {}
         self.profile_matrix['A'] = {}
         self.profile_matrix['C'] = {}
         self.profile_matrix['G'] = {}
         self.profile_matrix['T'] = {}
-        pass
+        self.load_profile_matrix(file)
+        self.consensus_string = self.get_consensus_string()
 
     def load_profile_matrix(self,file):
         values = self.ru.read_input_file(file)
@@ -41,9 +49,8 @@ class CONS:
 
 
 def Main():
-    cons = CONS()
-    cons.load_profile_matrix('sample.txt')
-    print(cons.get_consensus_string())
+    cons = CONS('sample.txt')
+    print(cons.consensus_string)
     cons.print_matrix()
 
 if __name__ == '__main__':
