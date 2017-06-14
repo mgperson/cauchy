@@ -1,3 +1,7 @@
+#Matt Person
+#Rosalind Problem: TestREVP
+#source
+
 import unittest
 
 from..REVP import REVP
@@ -6,7 +10,6 @@ class TESTREVP(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.revp = REVP('TCAATGCATGCGGGTCTATATGCAT')
-        pass
 
     def test_get_all_subsequences_of_length_n(self):
         n = 4
@@ -51,11 +54,11 @@ class TESTREVP(unittest.TestCase):
     def test_get_reverse_palindromes_of_length_n(self):
         n = 4
         test_string = 'GGCCAATT'
-        expected = [(0,n),(4,n)]
+        expected = [(1,n),(5,n)]
         self.assertEqual(self.revp.get_reverse_palindromes_of_length_n(test_string,n),expected)
 
     def test_get_reverse_palindromes_of_length_4_to_12(self):
         test_string = 'TCAATGCATGCGGGTCTATATGCAT'
-        expected = sorted([(3,6),(4,4),(5,6),(6,4),(16,4),(17,4),(19,6),(20,4)])
+        expected = sorted([(4,6),(5,4),(6,6),(7,4),(17,4),(18,4),(20,6),(21,4)])
         self.assertListEqual(sorted(self.revp.get_reverse_palindromes_of_length_4_to_12(test_string)),expected)
 
