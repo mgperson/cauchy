@@ -1,3 +1,7 @@
+#Matt Person
+#Rosalind Problem: LONG
+#unit tests
+
 import unittest
 
 from ..LONG import LONG

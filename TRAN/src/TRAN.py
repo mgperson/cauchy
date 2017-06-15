@@ -1,41 +1,12 @@
-import itertools
+#Matt Person
+#Rosalind Problem: TRAN
+#source
+'''Given: Two DNA strings s1 and s2 of equal length (at most 1 kbp).
+Return: The transition/transversion ratio R(s1,s2).'''
 
-#also including lexf because it's short and sweet, and sign for same reason
 class TRAN:
-    def __init__(self):
-        pass
-
-    def get_signed_permutations_of_n(self,n):
-        # nums = [i for i in range(-n,0)] + [i for i in range(1,n+1)]
-        # results = []
-        # for i in list(itertools.permutations(nums,r=n)):
-        #     results.append(' '.join([str(j) for j in i]))
-        permutations = []
-        self.get_signed_permutations(list(range(1,n+1)),'',permutations)
-        return permutations
-
-    def get_signed_permutations(self,nums,permutation,permutations):
-        #print(nums)
-        if len(nums) == 0:
-            permutations.append(permutation)
-            return
-        #for i in range(len(nums)):
-        for num in nums:
-            nums.remove(num)
-            self.get_signed_permutations(nums,permutation + (' ' if permutation != '' else '') + str(num),permutations)
-            self.get_signed_permutations(nums, permutation + (' ' if permutation != '' else '') + str(-num), permutations)
-            nums.insert(0,num)
-        return permutations
-
-
-    def get_lexicographical_order_of_alphabet(self,a,n):
-        results = []
-        for iter in itertools.product(sorted(a),repeat=n):
-            result = ''
-            for letter in iter:
-                result += letter
-            results.append(result)
-        return results
+    def __init__(self,a,b):
+        self.transition_transversion_ratio = self.get_transition_transversion_ratio(a,b)
 
     def get_mutation_type(self,a,b):
         if a == b:
@@ -58,18 +29,10 @@ class TRAN:
 
 
 def Main():
-    solver = TRAN()
     a = 'ATGTAGCAATGTTCCGGCTGGGGTTACGAAAGCTGCTGAGCATGTCGACAGCAACCCTGTACGTCGGAGGTTAGGATGGTTAGATAGACATGCTGGGGCTGAGACAGACGTCAAAGAAAGACAGGCAGTGCGCCGCACAAACCAAATACAGATTCACTGGCTAATTGGTCGAGAGTCGATTCAGCAGAAGGAGCCCCACACATCTTTATGCATCATTCCGTATGATAATCGGCTCTGAACCGTACTTGATCATAATGTCAAATTCTGTGATGTGCAAGTGCTAACAATGCTTTTTACAGATCCGCAATCCGGCATAATCGAAGGTCTTATGTGGGCGCCTGTATGACAAATCCTCCTGTCTGTTGTGAGGTGCCTATGGTTGTTGCTTCCGAAGAGCTCGGTGGATACTATCAACTCTCAGGAAAAGGACTCCTGAGGCACAGTTCCGTGAGATCCTTCGCTTGTGAAGGTGGACGAAGTATGTTTTGCCTACTATTCCCGAACCGGCCCGTATCAAGGAACTCGTTCTAAGTAAGAATCAGTCTTTTGAGGTGTTCCAGGAGCCGAACCCTTTTAAAAGTAGATTTTCAATACGTATTCAAAATCACGCTGAGCCCGTTCGTATACGGCTAGCATCTTGGTTATGGAGTTCCCCAGCGCCTGATTAGAGGACTCCTGTGAGAGTAATCCATCTGCACTACAAAATCTCCGGCCCGTCTGCTCCCCTGTAAAACCTAGCAACATTATTCTACCGGACCCCAGGCGAGAATATGAGGGAGATTTCACTGTCCATTAGGCTCATAAATGCCCTATCCTCAGCAGCGTGTGAGGCGCTTTTCCACAGTGGCCTGGGTTGTCTTACTCACCCTAAGCCAACATTAGAAGACTACCTTTTGTACAGCTTTGGCCTCGCCAGTATAGC'
     b = 'ATGTAGCAAGGCTTTGCTCAGGGTCATGGAGGCTCCTTCGCGCGTCGACAGTAACCCTGTACTTCGGAGATTAGGAGGGTATGATAGATATCCCCGGACTGAGACAGCTATCGAATAAAAACAGGGAGCGCATCGCGCAAGTCGAACACAGATTTACTAGACACCAGTCCGAGTGTTGATCCTGCAAAAGGAGTCTCACACTTACTCGTGCATTATATTACTTGATAACAGGCTCTTAACCGTGCTTGATTAAAAAGTCCAATCCTTTGATACACAGATTTTAAAACTACCCTCTGCGGACCCACAATCTTCCATATTCGTAGATTTTATATAGCTGCCTGTGTAACAAGCCCACCCGTGTGATGTAGGGTTTCTATTGTTATTGCTTCCGAAGAGTCCCATGGGAACTATCAACCCTCAGGGTAGGGCCCCCCAAGGCACAGTTTCGTGAGATCCGTCAATTGTGAAGGTGGACAAAGCATGCTTTACCGGCCATAGCGGAACCGGCCCGGGTTAAGGGACTTACAACGGGCTTGGATTAGTCGTCTGAGGTGTTCTAGGAGCCAGGGCCCCCAAACTGTCGATTCTCAACACGTGTCCGAAATCATGTTGAGCGCGCCCATGTAAAGCCGGTATCTCTGTTAAGGAGTTACCCTGCGCCTATTTGGAGATCTCCTATAGTAGTAAACCATCTGCATTGTAAGGTTTTCGGCCCGTCTTTTCACCGGGGGAGCCTAACGATATTAGTTTGCCGGCCCCAAGCCGAGAATGCGAGAGCAATGTTACTCTTCACTAGGCCCACAGATGCCTTATCCCCGGCAGCCTATGAGACGTCGCTTTACAGTTACATAGGTTGGCTTGCTCGCCTCGAGCCAACATTAGGGTTTCATGCCTTCTACAGCCTTTATCTCGCCAATAAACC'
-    print(solver.get_transition_transversion_ratio(a,b))
-    a = 'A B C D E F G H'.split()
-    n = 3
-    print(*solver.get_lexicographical_order_of_alphabet(a,n))
-    n = 3
-    output = solver.get_signed_permutations_of_n(n)
-    with open('output',"w") as output_data:
-        output_data.write(str(len(output)) + '\n')
-        output_data.write('\n'.join(output))
+    solver = TRAN(a,b)
+    print(solver.transition_transversion_ratio)
 
 
 if __name__ == '__main__':

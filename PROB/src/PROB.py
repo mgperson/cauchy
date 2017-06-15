@@ -1,20 +1,14 @@
-'''Solutions for PROB and RSTR'''
-
+#Matt Person
+#Rosalind Problem: PROB
+#source
+'''Given: A DNA string s of length at most 100 bp and an array A containing at most 20 numbers between 0 and 1.
+Return: An array B having the same length as A in which B[k] represents the common logarithm of the probability that a
+random string constructed with the GC-content found in A[k] will match ss exactly.'''
 import math
 
 class PROB:
-    def __init__(self):
-        pass
-
-    def calculate_prob_of_string_in_n_given_gc(self,s,n,gc_content):
-        G_or_C_content,A_or_C_content = self.calculate_GorC_and_AorT_prob(gc_content)
-        #print(G_or_C_content,A_or_C_content)
-        prob_one_string_equal = 1
-        for base in s:
-            prob_one_string_equal *= G_or_C_content if base in 'GC' else A_or_C_content
-            #print(prob_one_string_equal)
-        #print(prob_one_string_equal)
-        return round((1 - (1-prob_one_string_equal)**n),3)
+    def __init__(self,s,A):
+        self.B = self.calculate_all_probs_of_string_with_log(A,s)
 
     def calculate_GorC_and_AorT_prob(self,GC_content):
         return (GC_content/2,(1-GC_content)/2)
@@ -28,7 +22,6 @@ class PROB:
     def calculate_all_probs_of_string_with_log(self,probs,s):
         results = []
         values = map(float,probs.split())
-        print(values)
         for value in values:
             gorc,aort = self.calculate_GorC_and_AorT_prob(value)
             results.append(self.calculate_prob_of_string(gorc,aort,s))
@@ -37,12 +30,8 @@ class PROB:
 def Main():
     GCs = '0.066 0.110 0.162 0.244 0.286 0.343 0.396 0.431 0.500 0.536 0.614 0.644 0.714 0.738 0.819 0.868 0.914'
     s = 'CGCCTGTGGTGTGATCTGAATCTTAATGGACGCTCCTACTGAGGACGCCCTATTTAAATCGCCCTGCACTTACGCGTTTGCTTTAGATCCAAACGCATCG'
-    solver = PROB()
-    #print(*solver.calculate_all_probs_of_string_with_log(GCs,s))
-    gc = 0.423093
-    s = 'TTGGATCCTT'
-    n = 92492
-    print(solver.calculate_prob_of_string_in_n_given_gc(s,n,gc))
+    solver = PROB(s,GCs)
+    print(*solver.B)
 
 if __name__ == '__main__':
     Main()
