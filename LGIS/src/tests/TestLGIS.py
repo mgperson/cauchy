@@ -1,12 +1,17 @@
+#Matt Person
+#Rosalind Problem: LGIS
+#unit tests
+
+
 import unittest
 
 from ..LGIS import LGIS
 
 class TestLGIS(unittest.TestCase):
     def setUp(self):
-        self.lgis = LGIS()
+        self.sample_permutation = [5, 1, 4, 2, 3]
+        self.lgis = LGIS(self.sample_permutation)
         self.sample_n = 5
-        self.sample_permutation = [5,1,4,2,3]
 
     def test_subequences_of_51423_of_length_4_are_correct(self):
         expected_result = [(5,1,4,2),(5,1,4,3),(5,1,2,3),(5,4,2,3),(1,4,2,3)]
