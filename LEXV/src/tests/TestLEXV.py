@@ -1,14 +1,18 @@
+#Matt Person
+#Rosalind Problem: LEXV
+#unit tests
+
 import unittest
 
 from .. LEXV import LEXV
 
 class TestLEXV(unittest.TestCase):
     def setUp(self):
-        self.lexv = LEXV()
-
-    def test_get_strings_length_n_from_A(self):
         A = ''.join('D N A'.split())
         n = 3
+        self.lexv = LEXV(A,n)
+
+    def test_get_strings_length_n_from_A(self):
         output = []
         expected = '''D
 DD
@@ -49,5 +53,4 @@ AA
 AAD
 AAN
 AAA'''.split()
-        self.lexv.get_strings_length_n_from_A(output, A, '', n)
-        self.assertEqual(output,expected)
+        self.assertEqual(self.lexv.lexicographically_ordered_strings,expected)

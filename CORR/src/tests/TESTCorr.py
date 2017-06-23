@@ -1,14 +1,14 @@
+#Matt Person
+#Rosalind Problem: CORR
+#unit tests
+
 import unittest
 
 from ..CORR import CORR
 
 class TestCORR(unittest.TestCase):
     def setUp(self):
-        self.corr = CORR('src\sample.txt')
-        self.corr.load_reads_by_count_with_rev_comp()
-
-    def test_load_reads_by_count_with_rev_comp(self):
-        self.assertEqual(self.corr.get_reads_count('TTGAT'),2)
+        self.corr = CORR('src\\test.txt')
 
     def test_get_reads_with_one_count(self):
         print(self.corr.reads_count)

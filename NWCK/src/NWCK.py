@@ -1,11 +1,21 @@
+#Matt Person
+#Rosalind Problem: NWCK
+#source
+'''Given: A collection of n trees (n≤40) in Newick format, with each tree containing at most 200 nodes;
+each tree Tk is followed by a pair of nodes xk and yk in Tk.
+Return: A collection of n positive integers, for which the kth integer represents the distance between xk and yk in Tk.'''
+
+#Note: Might go back and use rosalind utilities Newick tree for this...
+
+
 class NWCK:
-    def __init__(self,NWCK_tree):
-        self.nwck_tree = NWCK_tree
+    def __init__(self, Tk, xk, yk):
+        self.nwck_tree = Tk
         self.edges = {}
         self.GUID = 0
         self.i = 0
         self.load_all_edges()
-        pass
+        self.distance_between_nodes = self.get_distance_between_nodes(xk,yk)
 
     def load_all_edges(self):
         next_token = self.get_next_token()
@@ -13,7 +23,6 @@ class NWCK:
             if next_token == '(':
                 self.load_edges()
                 next_token = self.get_next_token()
-        #print(self.edges)
 
     def get_GUID(self):
         self.GUID += 1
@@ -57,37 +66,6 @@ class NWCK:
                     queue.insert(0,(adjacent_node,node[1]+1))
         return -1
 
-
-
-
-    # def get_distance_between_nodes(self, node_a, node_b):
-    #     index = 0
-    #     distance = 2
-    #     counting_distance = False
-    #     prev_token = ''
-    #
-    #     next_token = self.get_next_token(index)
-    #     while next_token != '':
-    #         #print(next_token)
-    #         if counting_distance:
-    #             distance += self.adjust_distance(next_token,prev_token)
-    #         if next_token == node_a or next_token == node_b:
-    #             if counting_distance:
-    #                 return abs(distance)
-    #             counting_distance = not counting_distance
-    #         index += len(next_token)
-    #         prev_token = next_token
-    #         next_token = self.get_next_token(index)
-
-    # def adjust_distance(self,token,prev_token):
-    #     if token == '(':
-    #         return 1
-    #     if token == ')':
-    #         return -1
-    #     if token == ',' and prev_token == ')':
-    #         return 2
-    #     else:
-    #         return 0
 
     def is_special_character(self,char):
         return char in '(),;'
@@ -222,8 +200,8 @@ Larus_glacialis Gonocephalus_carbonaria
     values = data.split()
     result = []
     for i in range(len(values)//3):
-        nwck = NWCK(values[i*3])
-        result.append(nwck.get_distance_between_nodes(values[i*3+1],values[i*3+2]))
+        nwck = NWCK(values[i*3],values[i*3+1],values[i*3+2])
+        result.append(nwck.distance_between_nodes)
     print(*result)
 
 if __name__ == '__main__':
