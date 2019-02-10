@@ -27,7 +27,7 @@ class KMER():
 
 
 def Main():
-    kmer = KMER('solution.txt')
+    kmer = KMER('solution_backup.txt')
     print(*kmer.kmers)
 
 if __name__ == '__main__':

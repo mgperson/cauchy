@@ -1,7 +1,9 @@
 import os, math
 import sys
 import itertools
-sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
+#sys.path.insert(0,'C:\\Users\\Matthew\\Desktop\\Python Projects\\Rosalind\\')
+sys.path.insert(0,'C:\\Users\\mgpers\\Documents\\python_projects\\cauchy\\')
+
 
 from RUtils.src.RosalindUtilities import RosalindUtilities
 
