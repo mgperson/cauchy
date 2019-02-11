@@ -5,11 +5,11 @@ class TestErrors(unittest.TestCase):
     def setUp(self):
         self.errors = ERRORS(4,2,0,1,{})
 
-    @unittest.SkipTest
     def test_get_expected_misreads(self):
         errors = ERRORS(15, 6, 0.005, 10,{})
         self.assertEqual(errors.answer,0.08040206039130814)
 
+    @unittest.SkipTest
     def test_get_brute_force_probability(self):
         self.assertEqual(self.errors.get_brute_force_probability(1,2),7/9)
         self.assertEqual(self.errors.get_brute_force_probability(1, 0), 0)
@@ -32,6 +32,7 @@ class TestErrors(unittest.TestCase):
         expected = [1/8,3/8,3/8,1/8]
         self.assertEqual(self.errors.get_probability_distribution_of_incorrect_reads(3, 2), expected)
 
+    @unittest.SkipTest
     def test_get_distributions(self):
         expected = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
         self.assertEqual(self.errors.get_distributions(1),expected)
@@ -41,6 +42,7 @@ class TestErrors(unittest.TestCase):
         self.assertEqual(self.errors.get_error_probability_with_distribution(2, 1, 1, 1), 0)
         self.assertEqual(self.errors.get_error_probability_with_distribution(2, 2, 2, 1), 2/3)
 
+    @unittest.SkipTest
     def test_generate_distributions(self):
         self.assertEqual(self.errors.generate_distributions(1),['C','G','T'])
         self.assertEqual(self.errors.generate_distributions(2),  ['CC', 'GC', 'TC', 'CG', 'GG', 'TG', 'CT', 'GT', 'TT'])

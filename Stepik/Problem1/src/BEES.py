@@ -108,7 +108,7 @@ def Main():
     '''.split('\n')
 
 
-    with open('solution_backup.txt','w') as output:
+    with open('solution.txt','w') as output:
         for i in range(int(input[0])):
             line = input[i+1].split()
             line = map(float,line)

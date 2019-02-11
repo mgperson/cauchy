@@ -138,11 +138,6 @@ class TRANSPOSE:
                     return False
             strand_index += 1
             other_strand_index += 1
-
-        #insert_error_count += abs(len(strand) - strand_index) + abs(len(other_strand) - other_strand_index)
-        #if mismatch_error_count + insert_error_count + delete_error_count > error_max:
-            #return False
-
         return True
 
     def get_occurences_at_index(self,index):
@@ -188,8 +183,7 @@ class TRANSPOSE:
             occurrences = self.get_occurences_at_index(i)
             for candidate in index_by_strand_dictionary.keys():
                 candidate_locations = index_by_strand_dictionary[candidate]
-                #candidate_locations = [indexes[0] for indexes in index_by_strand_dictionary[candidate]]
-                #print(candidate_locations)
+
                 if not self.is_overlap(candidate_locations,i,self.insert_delete_mode):
                     for occurrence in occurrences:
                         if self.is_strand_a_match(occurrence,candidate,self.d):
@@ -212,16 +206,6 @@ class TRANSPOSE:
         #print(result)
         return candidate,sorted(result)
 
-        # for key in index_by_strand_dictionary.keys():
-        #     locations = index_by_strand_dictionary[key]
-        #     if len(locations) >= self.n:
-        #         print(index_by_strand_dictionary[key],candidate)
-        #         candidate = key
-        #         print(candidate)
-        #         for index in index_by_strand_dictionary[key]:
-        #             result.append((index,occurrences_by_candidate_dictionary[candidate][index]))
-        #         #print(result)
-        #         return candidate,sorted(result)
 
         raise Exception('no candidate found')
 
